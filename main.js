@@ -5,7 +5,7 @@ const Carrito = require('./carrito')
 const app = express()
 
 const productsRouter = Router()
-const carRouter = Router()
+const cartRouter = Router()
 
 const contenedor = new Contenedor('products.txt')
 const carrito = new Carrito('carrito.txt')
@@ -13,7 +13,7 @@ const carrito = new Carrito('carrito.txt')
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use('/api/productos', productsRouter)
-app.use('/api/carrito', carRouter)
+app.use('/api/carrito', cartRouter)
 app.use('',express.static(__dirname + 'public'))
 
 
@@ -84,4 +84,41 @@ productsRouter.delete('/:id', async (req,res)=>{
 })
 
 
-carRouter.post('',)
+carRouter.post('', async (req, res)=> {
+  const now =  new Date()
+  const prod = []
+  const cart =  {
+    timestamp: now,
+    productos : prod
+  }
+
+  await carrito.save(cart)
+
+  return res.jsom(cart.id)
+})
+
+cartRouter.delete('/:id', async (req, res) => {
+  const id = Number(req.params.id)
+  const carrito = await cart.getById(id)
+ 
+  if(carrito === undefined){
+  return res.status(404).json({error: 'Carrito no encontrado'})
+  }
+  await carrito.deleteById(id)
+  return res.json(carrito)
+})
+
+cartRouter.get('/:id/productos',(req,res) => {
+  const id = Number(req.params.id)
+  const cart = await carrito.getById(id)
+  
+if (cart === undefined){
+  return res.status(404).json({error: 'Carrito no encontrado'})
+}
+
+  return res.json(cart)
+})
+
+cartRouter.post('/:id/productos', (req, res) => {
+  
+})

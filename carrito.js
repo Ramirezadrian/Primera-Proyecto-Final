@@ -17,12 +17,12 @@ class Carrito{
             data = []
         }
 
-        const lastProduct = data[data.length - 1] //conozco la posicion del ultimo elemento
+        const lastCart = data[data.length - 1] //conozco la posicion del ultimo elemento
 
         let id = 1
 
-        if (lastProduct) { // si hay productos le sumo uno al id
-             id = lastProduct.id + 1
+        if (lastCart) { // si hay productos le sumo uno al id
+             id = lastCart.id + 1
         }
         object.id = id
 
