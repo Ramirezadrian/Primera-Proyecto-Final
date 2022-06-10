@@ -16,7 +16,7 @@ app.use('/api/productos', productsRouter)
 app.use('/api/carrito', cartRouter)
 app.use('',express.static(__dirname + 'public'))
 
-
+let administrador
 const PORT = 8080
 
 const server = app.listen(PORT, () => {
@@ -120,5 +120,21 @@ if (cart === undefined){
 })
 
 cartRouter.post('/:id/productos', (req, res) => {
-  
+  const id = Number(req.params.id)
+  const producto = contenedor.getById(id)
+
+ carrito.save(product)
+
+ res.json(carrito)
+})
+
+cartRouter.delete('/:id/productos/:id_prod', (req, res) => {
+  const id = Number(req.params.id)
+  const id_prod = Numbre(req.params.id_prod)
+  const cart = await carrito.getById(id)
+
+  cart.deleteById(id_prod)
+
+  return res.json(cart)
+
 })

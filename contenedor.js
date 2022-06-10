@@ -18,6 +18,7 @@ class Contenedor{
         }
 
         const lastProduct = data[data.length - 1] //conozco la posicion del ultimo elemento
+        const now = Date.now()
 
         let id = 1
 
@@ -25,7 +26,7 @@ class Contenedor{
              id = lastProduct.id + 1
         }
         object.id = id
-
+        object.timestamp = now
         data.push(object) //agrego producto
 
         return fs.promises.writeFile(`./${this.nombreArchivo}`, JSON.stringify(data, null, 2)) //save del producto nuevo
@@ -40,9 +41,13 @@ class Contenedor{
         await this.deleteAll()
         for(let i = 0; i < objects.length; i++ ){
             let obj = {
-                "title":objects[i].title,
+               
+                "name":objects[i].name,
+                "description": objects.description,
+                "code": objects.code,
                 "price":objects[i].price,
-                "thumbnail":objects[i].thumbnail
+                "thumbnail":objects[i].thumbnail,
+                "stock": objects.stock
             }
             await this.save(obj)
         }
