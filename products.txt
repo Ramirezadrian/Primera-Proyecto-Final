@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Producto 05",
+    "description": "esto es un producto",
+    "code": "acacodigo",
+    "price": 111,
+    "thumbnail": "./img043",
+    "stock": 50,
+    "id": 1,
+    "timestamp": 1655322709328
+  },
+  {
+    "name": "Producto 09",
+    "description": "esto es ughjn producto",
+    "code": "acacodigbjho",
+    "price": 77,
+    "thumbnail": "./img04",
+    "stock": 500,
+    "id": 2,
+    "timestamp": 1655322785057
+  }
+]

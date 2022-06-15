@@ -62,9 +62,11 @@ productsRouter.put('/:id', async (req, res)=>{
   }
   const body = req.body
 
-  products[productIndex].title = body.title
+ /*  products[productIndex].name = body.name
   products[productIndex].price = body.price
-  products[productIndex].thumbnail = body.thumbnail 
+  products[productIndex].thumbnail = body.thumbnail  */
+
+  products[productIndex] = body
   
   //cree esta funcion en contenedor.js para actualizar y no perder los id
   await contenedor.update(products[productIndex])
@@ -84,7 +86,7 @@ productsRouter.delete('/:id', async (req,res)=>{
 })
 
 
-carRouter.post('', async (req, res)=> {
+cartRouter.post('', async (req, res)=> {
   const now =  new Date()
   const prod = []
   const cart =  {
@@ -94,14 +96,14 @@ carRouter.post('', async (req, res)=> {
 
   await carrito.save(cart)
 
-  return res.jsom(cart.id)
+  return res.json(cart.id)
 })
 
 cartRouter.delete('/:id', async (req, res) => {
   const id = Number(req.params.id)
-  const carrito = await cart.getById(id)
- 
-  if(carrito === undefined){
+  const cart = await carrito.getById(id)
+  
+  if(cart === undefined){
   return res.status(404).json({error: 'Carrito no encontrado'})
   }
   await carrito.deleteById(id)
@@ -110,7 +112,7 @@ cartRouter.delete('/:id', async (req, res) => {
 
 cartRouter.get('/:id/productos',(req,res) => {
   const id = Number(req.params.id)
-  const cart = await carrito.getById(id)
+  const cart =  carrito.getById(id)
   
 if (cart === undefined){
   return res.status(404).json({error: 'Carrito no encontrado'})
@@ -119,22 +121,40 @@ if (cart === undefined){
   return res.json(cart)
 })
 
-cartRouter.post('/:id/productos', (req, res) => {
+cartRouter.post('/:id/productos', async (req, res) => {
   const id = Number(req.params.id)
-  const producto = contenedor.getById(id)
+//  const cart = await carrito.getById(id)
+  const producto = await contenedor.getById(id)
+console.log(id)
 
- carrito.save(product)
+console.log(producto)
+  const cartUpdate = {
+ 
+    "productos": producto
+  }
+    carrito.save(cartUpdate)
+    
+  return res.json(carrito)
 
- res.json(carrito)
+
+ 
 })
 
-cartRouter.delete('/:id/productos/:id_prod', (req, res) => {
+cartRouter.delete('/:id/productos/:id_prod', async (req, res) => {
   const id = Number(req.params.id)
-  const id_prod = Numbre(req.params.id_prod)
-  const cart = await carrito.getById(id)
+  const id_prod = Number(req.params.id_prod)
+  const cart =  await carrito.getById(id)
 
-  cart.deleteById(id_prod)
+let newPro = cart.productos
+let nnp = newPro.filter(prod => prod.id !== id_prod)
 
-  return res.json(cart)
+  const newCart = {
+    "id": id,
+    "timestamp": cart.timestamp,
+    "productos":  nnp
+  }
+
+  carrito.save(newCart)
+  return res.json(carrito)
 
 })
