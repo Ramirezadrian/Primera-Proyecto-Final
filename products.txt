@@ -1,22 +1,42 @@
 [
   {
-    "name": "Producto 05",
-    "description": "esto es un producto",
-    "code": "acacodigo",
-    "price": 111,
-    "thumbnail": "./img043",
-    "stock": 50,
+    "name": "nuevo",
+    "description": "descriopciopn del producto",
+    "code": 4,
+    "price": 10,
+    "thumbnail": "www.imagenes.com/nuevo",
+    "stock": 25,
     "id": 1,
-    "timestamp": 1655322709328
+    "timestamp": 1655864572543
   },
   {
-    "name": "Producto 09",
-    "description": "esto es ughjn producto",
-    "code": "acacodigbjho",
-    "price": 77,
-    "thumbnail": "./img04",
-    "stock": 500,
+    "name": "nuevo2",
+    "description": "descriopciopn del producto",
+    "code": 4,
+    "price": 10,
+    "thumbnail": "www.imagenes.com/nuevo",
+    "stock": 25,
     "id": 2,
-    "timestamp": 1655322785057
+    "timestamp": 1655864572547
+  },
+  {
+    "id": 3,
+    "timestamp": 1655864572548,
+    "name": "333333",
+    "description": "descriopciopn del producto",
+    "code": 4,
+    "price": 10,
+    "thumbnail": "www.imagenes.com/33333",
+    "stock": 25
+  },
+  {
+    "name": "nuevo4",
+    "description": "descriopciopn del producto",
+    "code": 4,
+    "price": 10,
+    "thumbnail": "www.imagenes.com/nuevo",
+    "stock": 25,
+    "id": 4,
+    "timestamp": 1655864572550
   }
 ]

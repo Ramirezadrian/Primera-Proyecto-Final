@@ -62,12 +62,16 @@ productsRouter.put('/:id', async (req, res)=>{
   }
   const body = req.body
 
- /*  products[productIndex].name = body.name
-  products[productIndex].price = body.price
-  products[productIndex].thumbnail = body.thumbnail  */
-
-  products[productIndex] = body
   
+  products[productIndex].name = body.name
+  products[productIndex].description = body.description
+  products[productIndex].code = body.code
+  products[productIndex].price = body.price
+  products[productIndex].thumbnail = body.thumbnail  
+  products[productIndex].stock = body.stock
+
+ // products[productIndex] = body
+ 
   //cree esta funcion en contenedor.js para actualizar y no perder los id
   await contenedor.update(products[productIndex])
     
@@ -123,16 +127,17 @@ if (cart === undefined){
 
 cartRouter.post('/:id/productos', async (req, res) => {
   const id = Number(req.params.id)
-//  const cart = await carrito.getById(id)
-  const producto = await contenedor.getById(id)
-console.log(id)
+  const cart = await carrito.getById(id)
+  const product = req.body
+//encontrar id de carrito y actualizarle los prodcutos
+console.log(cart)
 
-console.log(producto)
   const cartUpdate = {
- 
-    "productos": producto
+    "id": cart.id,
+    "timestamp": cart.timestamp,
+    "productos": product
   }
-    carrito.save(cartUpdate)
+    carrito.update(cartUpdate)
     
   return res.json(carrito)
 
@@ -144,9 +149,9 @@ cartRouter.delete('/:id/productos/:id_prod', async (req, res) => {
   const id = Number(req.params.id)
   const id_prod = Number(req.params.id_prod)
   const cart =  await carrito.getById(id)
+  
 
-let newPro = cart.productos
-let nnp = newPro.filter(prod => prod.id !== id_prod)
+let nnp = cart.productos.filter(prod => prod.id !== id_prod)
 
   const newCart = {
     "id": id,
@@ -154,7 +159,7 @@ let nnp = newPro.filter(prod => prod.id !== id_prod)
     "productos":  nnp
   }
 
-  carrito.save(newCart)
-  return res.json(carrito)
+  carrito.update(newCart)
+  return res.json(newCart)
 
 })

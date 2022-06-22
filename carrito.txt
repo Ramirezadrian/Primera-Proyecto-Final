@@ -1,0 +1,33 @@
+[
+  {
+    "timestamp": "2022-06-22T02:57:44.408Z",
+    "productos": [],
+    "id": 1
+  },
+  {
+    "timestamp": "2022-06-22T02:58:07.888Z",
+    "productos": [],
+    "id": 2
+  },
+  {
+    "timestamp": "2022-06-22T02:58:10.940Z",
+    "productos": [],
+    "id": 3
+  },
+  {
+    "id": 4,
+    "timestamp": "2022-06-22T02:58:10.940Z",
+    "productos": [
+      {
+        "id": 4,
+        "timestamp": 1655864572548,
+        "name": "333333",
+        "description": "descriopciopn del producto",
+        "code": 4,
+        "price": 10,
+        "thumbnail": "www.imagenes.com/33333",
+        "stock": 25
+      }
+    ]
+  }
+]

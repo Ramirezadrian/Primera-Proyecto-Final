@@ -31,7 +31,7 @@ class Carrito{
         return fs.promises.writeFile(`./${this.nombreArchivo}`, JSON.stringify(data, null, 2)) //save del producto nuevo
 
   }
-    async update(object){
+/*     async update(object){
 
         //time, prod
 
@@ -49,6 +49,26 @@ class Carrito{
         }
        
      
+    } */
+
+    async update(object){
+
+        let objects = await this.getAll()
+        let index = object.id -1
+        let original = objects.find(p => p.id === object.id)
+        
+        let obj = {
+            "id"   : original.id,
+            "timestamp": original.timestamp,
+            "productos": object.productos //aca carga todo el carrito tiene que cargar sololos prodcutos
+        }
+        objects.splice(index ,1,obj)
+           await this.deleteAll()
+
+          for(let i =0 ; i< objects.length; i++){
+            await this.save(objects[i])
+           } 
+   
     }
 
     async getById(id){

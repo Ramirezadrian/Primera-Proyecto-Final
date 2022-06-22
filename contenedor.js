@@ -36,23 +36,25 @@ class Contenedor{
 
         let objects = await this.getAll()
         let index = object.id -1
-        objects.splice(index ,1,object)
+        let original = objects.find(p => p.id === object.id)
         
-        await this.deleteAll()
-        for(let i = 0; i < objects.length; i++ ){
-            let obj = {
-               
-                "name":objects[i].name,
-                "description": objects.description,
-                "code": objects.code,
-                "price":objects[i].price,
-                "thumbnail":objects[i].thumbnail,
-                "stock": objects.stock
-            }
-            await this.save(obj)
+        let obj = {
+            "id"   : original.id,
+            "timestamp": original.timestamp,
+            "name":object.name,
+            "description": object.description,
+            "code": object.code,
+            "price":object.price,
+            "thumbnail":object.thumbnail,
+            "stock": object.stock
         }
-       
-     
+        objects.splice(index ,1,obj)
+           await this.deleteAll()
+
+          for(let i =0 ; i< objects.length; i++){
+            await this.save(objects[i])
+           } 
+   
     }
 
     async getById(id){
