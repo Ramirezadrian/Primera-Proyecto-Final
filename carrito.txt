@@ -27,7 +27,27 @@
         "price": 10,
         "thumbnail": "www.imagenes.com/33333",
         "stock": 25
-      }
+      },
+      {
+        "id": 5,
+        "timestamp": 1655864572548,
+        "name": "3",
+        "description": "descriopciopn del producto",
+        "code": 8,
+        "price": 110,
+        "thumbnail": "www.imagenes.com/55",
+        "stock": 253
+      },
+            {
+        "id": 1,
+        "timestamp": 1655864572548,
+        "name": "4",
+        "description": "descriopciopn del producto",
+        "code": 24,
+        "price": 1230,
+        "thumbnail": "www.imagenes.com/4",
+        "stock": 5
+      }      
     ]
   }
 ]

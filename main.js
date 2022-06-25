@@ -114,15 +114,16 @@ cartRouter.delete('/:id', async (req, res) => {
   return res.json(carrito)
 })
 
-cartRouter.get('/:id/productos',(req,res) => {
+cartRouter.get('/:id/productos', async (req,res) => {
   const id = Number(req.params.id)
-  const cart =  carrito.getById(id)
+  const cart =  await carrito.getById(id)
+
   
 if (cart === undefined){
   return res.status(404).json({error: 'Carrito no encontrado'})
 }
 
-  return res.json(cart)
+  return res.json(cart.productos)
 })
 
 cartRouter.post('/:id/productos', async (req, res) => {
